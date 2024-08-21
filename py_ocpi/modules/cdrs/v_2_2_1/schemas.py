@@ -26,7 +26,7 @@ class SignedData(BaseModel):
     encoding_method: CiString(36)
     encoding_method_version: Optional[int]
     public_key: Optional[String(512)]
-    signed_value: List[SignedValue]
+    signed_values: List[SignedValue]
     url: Optional[String(512)]
 
 
