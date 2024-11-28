@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 from py_ocpi.modules.cdrs.v_2_2_1.enums import AuthMethod, CdrDimensionType
 
 from py_ocpi.core.data_types import CiString, Number, Price, String, DateTime
@@ -57,6 +57,14 @@ class CdrToken(BaseModel):
     type: TokenType
     contract_id: CiString(36)
 
+    @validator('country_code')
+    def country_code_to_upper(cls, v):
+        return v.upper()
+    
+    @validator('party_id')
+    def party_id_to_upper(cls, v):
+        return v.upper()
+
 
 class CdrLocation(BaseModel):
     """
@@ -112,3 +120,11 @@ class Cdr(BaseModel):
     credit_reference_id: Optional[CiString(39)]
     home_charging_compensation: Optional[bool]
     last_updated: DateTime
+
+    @validator('country_code')
+    def country_code_to_upper(cls, v):
+        return v.upper()
+    
+    @validator('party_id')
+    def party_id_to_upper(cls, v):
+        return v.upper()
