@@ -48,7 +48,7 @@ async def send_command_result(response_url: str, command: CommandType, auth_toke
     for _ in range(150):  # check for 5 mins
         # since command has no id, 0 is used for id parameter of crud.get
         command_result = await crud.get(ModuleID.commands, RoleEnum.cpo, 0,
-                                        auth_token=auth_token, version=VersionNumber.v_2_2_1, command=command)
+                                        auth_token=auth_token, version=VersionNumber.v_2_2_1, command=command, response_url=response_url)
         if command_result:
             break
         await sleep(2)
